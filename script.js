@@ -1,3 +1,5 @@
+document.addEventListener("DOMContentLoaded", () => {
+
 const muscles = {
   Pectoraux: { min: 10, max: 20 },
   Dos: { min: 10, max: 20 },
@@ -28,15 +30,15 @@ const exercises = [
 let remainingSeries = {};
 let selectedMuscles = [];
 
-const muscleList = document.getElementById("muscle-list");
+const muscleListDiv = document.getElementById("muscle-list");
 Object.keys(muscles).forEach(m => {
   const label = document.createElement("label");
   label.innerHTML = `<input type="checkbox" value="${m}"> ${m}`;
-  muscleList.appendChild(label);
+  muscleListDiv.appendChild(label);
 });
 
 document.getElementById("generate").addEventListener("click", () => {
-  selectedMuscles = Array.from(document.querySelectorAll("input:checked")).map(m => m.value);
+  selectedMuscles = Array.from(document.querySelectorAll("#muscle-list input:checked")).map(i => i.value);
   if(selectedMuscles.length === 0) return alert("Choisis au moins un muscle !");
 
   remainingSeries = {};
@@ -54,6 +56,7 @@ document.getElementById("generate").addEventListener("click", () => {
   document.getElementById("exercises-section").classList.remove("hidden");
   document.getElementById("planner-section").classList.remove("hidden");
 
+  // pool d'exercices
   const pool = document.getElementById("exercise-pool");
   pool.innerHTML = "";
   exercises.filter(e => selectedMuscles.includes(e.muscle)).forEach(ex => {
@@ -109,27 +112,4 @@ function enableDragDrop() {
       e.preventDefault();
       zone.classList.remove("dragover");
       const data = JSON.parse(e.dataTransfer.getData("text/plain"));
-      if(remainingSeries[data.muscle] <= 0) return alert(`${data.muscle} a atteint son quota !`);
-
-      const div = document.createElement("div");
-      div.className = "exercise";
-      div.textContent = `${data.name} (${data.series} séries)`;
-      zone.appendChild(div);
-
-      remainingSeries[data.muscle] -= parseInt(data.series);
-      updateQuotas();
-    });
-  });
-}
-
-function updateQuotas() {
-  Object.keys(remainingSeries).forEach(m => {
-    const li = document.getElementById(`quota-${m}`);
-    const remaining = remainingSeries[m];
-    const min = muscles[m].min;
-    const max = muscles[m].max;
-
-    li.textContent = `${m} → ${min} à ${max} séries/semaine (${Math.max(0, remaining)} restantes)`;
-    li.style.color = remaining > min ? "green" : remaining > 0 ? "orange" : "red";
-  });
-}
+      if(remainingSeries[data.muscle] <= 0) return

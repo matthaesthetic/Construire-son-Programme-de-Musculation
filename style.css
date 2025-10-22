@@ -34,11 +34,11 @@ button:hover { background: #0055aa; }
 }
 .exercise:hover { transform: scale(1.05); }
 
-.week-planner { display: grid; grid-template-columns: repeat(7, 1fr); gap: 10px; margin-top: 20px; }
+.week-planner { display: flex; gap: 10px; margin-top: 20px; overflow-x: auto; }
 
 .day {
   background: #001a33; padding: 10px;
-  border-radius: 10px; min-height: 150px;
+  border-radius: 10px; min-width: 130px; flex: 0 0 auto;
   display: flex; flex-direction: column;
   transition: transform 0.2s, box-shadow 0.2s;
 }
