@@ -1,40 +1,45 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Planning des Exercices</title>
-  <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mon programme muscu 🏋️‍♂️</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
   <header>
-    <h1>Planning de la semaine</h1>
-    <p>Glisse tes exercices dans les jours de la semaine !</p>
+    <h1>Crée ton programme de musculation</h1>
+    <p>Choisis tes muscles, glisse les exercices dans ton planning et suis tes séries !</p>
   </header>
 
-  <main>
-    <section class="planning">
-      <div class="jour" data-jour="lundi"><h2>Lundi</h2></div>
-      <div class="jour" data-jour="mardi"><h2>Mardi</h2></div>
-      <div class="jour" data-jour="mercredi"><h2>Mercredi</h2></div>
-      <div class="jour" data-jour="jeudi"><h2>Jeudi</h2></div>
-      <div class="jour" data-jour="vendredi"><h2>Vendredi</h2></div>
-    </section>
+  <section id="selection">
+    <h2>1️⃣ Choisis tes muscles prioritaires :</h2>
+    <div id="muscle-list"></div>
+    <button id="generate">Générer quotas et planning</button>
+  </section>
 
-    <section class="taches">
-      <h2>Exercices disponibles</h2>
-      <div class="tache" draggable="true" id="ex1">Math - Algèbre</div>
-      <div class="tache" draggable="true" id="ex2">Physique - Mécanique</div>
-      <div class="tache" draggable="true" id="ex3">Chimie - Réactions</div>
-      <div class="tache" draggable="true" id="ex4">Histoire - Moyen Âge</div>
-      <div class="tache" draggable="true" id="ex5">Français - Dissertation</div>
-      <div class="tache" draggable="true" id="ex6">Anglais - Compréhension</div>
-      <div class="tache" draggable="true" id="ex7">Sport - Course</div>
-      <div class="tache" draggable="true" id="ex8">Art - Dessin</div>
-      <div class="tache" draggable="true" id="ex9">Informatique - HTML/CSS</div>
-      <div class="tache" draggable="true" id="ex10">Musique - Piano</div>
-    </section>
-  </main>
+  <section id="quota-section" class="hidden">
+    <h2>2️⃣ Quotas hebdomadaires :</h2>
+    <ul id="quota-list"></ul>
+  </section>
+
+  <section id="exercises-section" class="hidden">
+    <h2>3️⃣ Exercices disponibles :</h2>
+    <div id="exercise-pool" class="exercise-pool"></div>
+  </section>
+
+  <section id="planner-section" class="hidden">
+    <h2>4️⃣ Planning de la semaine :</h2>
+    <div id="week-planner" class="week-planner">
+      <div class="day" id="Lundi"><h3>Lundi</h3><div class="dropzone"></div></div>
+      <div class="day" id="Mardi"><h3>Mardi</h3><div class="dropzone"></div></div>
+      <div class="day" id="Mercredi"><h3>Mercredi</h3><div class="dropzone"></div></div>
+      <div class="day" id="Jeudi"><h3>Jeudi</h3><div class="dropzone"></div></div>
+      <div class="day" id="Vendredi"><h3>Vendredi</h3><div class="dropzone"></div></div>
+      <div class="day" id="Samedi"><h3>Samedi</h3><div class="dropzone"></div></div>
+      <div class="day" id="Dimanche"><h3>Dimanche</h3><div class="dropzone"></div></div>
+    </div>
+  </section>
 
   <script src="script.js"></script>
 </body>

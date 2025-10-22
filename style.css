@@ -1,15 +1,11 @@
-/* === Reset simple === */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
+/* Couleurs : noir, bleu marine, beige, marron */
 body {
-  font-family: 'Arial', sans-serif;
-  background-color: #f5f0e6; /* beige clair */
-  color: #1a1a2e; /* bleu marine foncé pour texte */
+  font-family: "Poppins", sans-serif;
+  background: #0d0d0d;
+  color: #f5f5dc;
   padding: 20px;
+  max-width: 1000px;
+  margin: auto;
 }
 
 header {
@@ -17,62 +13,73 @@ header {
   margin-bottom: 30px;
 }
 
-h1 {
-  color: #1a1a2e; /* bleu marine */
-  margin-bottom: 10px;
-}
-
-p {
-  color: #5a3e36; /* marron */
-}
-
-.planning {
-  display: flex;
-  gap: 15px;
-  margin-bottom: 30px;
-}
-
-.jour {
-  flex: 1;
-  min-height: 300px;
-  border: 2px solid #5a3e36; /* marron */
+button {
+  background: #003366; /* bleu marine */
+  color: #f5f5dc;      /* beige */
+  border: none;
+  padding: 10px 20px;
   border-radius: 10px;
-  background-color: #fff8f0; /* beige clair */
-  padding: 10px;
-  transition: background-color 0.3s;
+  cursor: pointer;
+  transition: 0.3s;
+}
+button:hover {
+  background: #0055aa;
 }
 
-.jour h2 {
-  text-align: center;
-  margin-bottom: 10px;
-  color: #1a1a2e;
+#muscle-list label {
+  display: inline-block;
+  margin: 5px 10px;
+  background: #8b5e3c; /* marron */
+  padding: 8px 12px;
+  border-radius: 10px;
+  cursor: pointer;
 }
 
-.jour.dragover {
-  background-color: #d9e4f5; /* bleu clair quand on drag */
+.exercise-pool {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 10px;
 }
 
-.taches {
+.exercise {
+  background: #8b5e3c; /* marron */
+  padding: 8px 12px;
+  border-radius: 8px;
+  cursor: grab;
+  color: #f5f5dc;
+}
+
+.week-planner {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 10px;
   margin-top: 20px;
 }
 
-.taches h2 {
-  margin-bottom: 10px;
-  color: #1a1a2e;
-}
-
-.tache {
+.day {
+  background: #001a33; /* bleu marine foncé */
   padding: 10px;
-  margin-bottom: 8px;
-  background-color: #1a1a2e; /* bleu marine foncé */
-  color: #f5f0e6; /* texte beige */
-  cursor: grab;
-  border-radius: 5px;
-  user-select: none;
-  transition: transform 0.2s;
+  border-radius: 10px;
+  min-height: 150px;
+  display: flex;
+  flex-direction: column;
 }
 
-.tache:active {
-  transform: scale(1.05);
-  cursor: grabbing;
+.day h3 {
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.dropzone {
+  flex: 1;
+  background: #111;
+  border: 2px dashed #555;
+  border-radius: 8px;
+  padding: 5px;
+  min-height: 100px;
+}
+
+.exercise.dragging {
+  opacity: 0.5;
 }
