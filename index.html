@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mon constructeur de programme muscu 💪</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header>
+    <h1>🧠 Crée ton programme de musculation</h1>
+    <p>Choisis tes muscles prioritaires et construis ton plan de séries !</p>
+  </header>
+
+  <section id="selection">
+    <h2>1️⃣ Choisis tes muscles à prioriser :</h2>
+    <div id="muscle-list"></div>
+    <button id="generate">Générer mon quota de séries</button>
+  </section>
+
+  <section id="quota-section" class="hidden">
+    <h2>2️⃣ Tes quotas hebdomadaires :</h2>
+    <ul id="quota-list"></ul>
+  </section>
+
+  <section id="exercises-section" class="hidden">
+    <h2>3️⃣ Ajoute des exercices :</h2>
+    <select id="exercise-select"></select>
+    <button id="add-exercise">Ajouter</button>
+
+    <h3>Planning :</h3>
+    <ul id="exercise-plan"></ul>
+  </section>
+
+  <script src="script.js"></script>
+</body>
+</html>
