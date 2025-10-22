@@ -1,4 +1,3 @@
-// --- Données muscles & exercices ---
 const muscles = {
   Pectoraux: { min: 10, max: 20 },
   Dos: { min: 10, max: 20 },
@@ -26,30 +25,28 @@ const exercises = [
   { name: "Gainage", muscle: "Abdos", series: 3 }
 ];
 
-// --- Variables globales ---
-const remainingSeries = {};
+let remainingSeries = {};
 let selectedMuscles = [];
 
-// --- Étape 1 : afficher muscles ---
 const muscleList = document.getElementById("muscle-list");
-Object.keys(muscles).forEach(muscle => {
+Object.keys(muscles).forEach(m => {
   const label = document.createElement("label");
-  label.innerHTML = `<input type="checkbox" value="${muscle}"> ${muscle}`;
+  label.innerHTML = `<input type="checkbox" value="${m}"> ${m}`;
   muscleList.appendChild(label);
 });
 
-// --- Étape 2 : générer quotas et exercises ---
 document.getElementById("generate").addEventListener("click", () => {
   selectedMuscles = Array.from(document.querySelectorAll("input:checked")).map(m => m.value);
   if(selectedMuscles.length === 0) return alert("Choisis au moins un muscle !");
 
+  remainingSeries = {};
   const quotaList = document.getElementById("quota-list");
   quotaList.innerHTML = "";
-  selectedMuscles.forEach(muscle => {
-    remainingSeries[muscle] = muscles[muscle].max;
+  selectedMuscles.forEach(m => {
+    remainingSeries[m] = muscles[m].max;
     const li = document.createElement("li");
-    li.id = `quota-${muscle}`;
-    li.textContent = `${muscle} → ${muscles[muscle].min} à ${muscles[muscle].max} séries/semaine (${muscles[muscle].max} restantes)`;
+    li.id = `quota-${m}`;
+    li.textContent = `${m} → ${muscles[m].min} à ${muscles[m].max} séries/semaine (${muscles[m].max} restantes)`;
     quotaList.appendChild(li);
   });
 
@@ -70,15 +67,27 @@ document.getElementById("generate").addEventListener("click", () => {
     pool.appendChild(div);
   });
 
+  setupWeekPlanner();
   enableDragDrop();
 });
 
-// --- Drag & Drop ---
+function setupWeekPlanner() {
+  const week = ["Lundi","Mardi","Mercredi","Jeudi","Vendredi","Samedi","Dimanche"];
+  const planner = document.getElementById("week-planner");
+  planner.innerHTML = "";
+  week.forEach(day => {
+    const div = document.createElement("div");
+    div.className = "day";
+    div.innerHTML = `<h3>${day}</h3><div class="dropzone"></div>`;
+    planner.appendChild(div);
+  });
+}
+
 function enableDragDrop() {
-  const exerciseEls = document.querySelectorAll(".exercise");
+  const exercisesEls = document.querySelectorAll(".exercise");
   const dropzones = document.querySelectorAll(".dropzone");
 
-  exerciseEls.forEach(ex => {
+  exercisesEls.forEach(ex => {
     ex.addEventListener("dragstart", e => {
       ex.classList.add("dragging");
       e.dataTransfer.setData("text/plain", JSON.stringify({
@@ -91,9 +100,14 @@ function enableDragDrop() {
   });
 
   dropzones.forEach(zone => {
-    zone.addEventListener("dragover", e => e.preventDefault());
+    zone.addEventListener("dragover", e => {
+      e.preventDefault();
+      zone.classList.add("dragover");
+    });
+    zone.addEventListener("dragleave", e => zone.classList.remove("dragover"));
     zone.addEventListener("drop", e => {
       e.preventDefault();
+      zone.classList.remove("dragover");
       const data = JSON.parse(e.dataTransfer.getData("text/plain"));
       if(remainingSeries[data.muscle] <= 0) return alert(`${data.muscle} a atteint son quota !`);
 
@@ -108,18 +122,14 @@ function enableDragDrop() {
   });
 }
 
-// --- Mise à jour quotas ---
 function updateQuotas() {
-  Object.keys(remainingSeries).forEach(muscle => {
-    const li = document.getElementById(`quota-${muscle}`);
-    const remaining = remainingSeries[muscle];
-    const min = muscles[muscle].min;
-    const max = muscles[muscle].max;
+  Object.keys(remainingSeries).forEach(m => {
+    const li = document.getElementById(`quota-${m}`);
+    const remaining = remainingSeries[m];
+    const min = muscles[m].min;
+    const max = muscles[m].max;
 
-    li.textContent = `${muscle} → ${min} à ${max} séries/semaine (${Math.max(0, remaining)} restantes)`;
-
-    if (remaining > min) li.style.color = "green";
-    else if (remaining > 0) li.style.color = "orange";
-    else li.style.color = "red";
+    li.textContent = `${m} → ${min} à ${max} séries/semaine (${Math.max(0, remaining)} restantes)`;
+    li.style.color = remaining > min ? "green" : remaining > 0 ? "orange" : "red";
   });
 }
