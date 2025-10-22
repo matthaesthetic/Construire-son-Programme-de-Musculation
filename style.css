@@ -1,0 +1,78 @@
+/* === Reset simple === */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Arial', sans-serif;
+  background-color: #f5f0e6; /* beige clair */
+  color: #1a1a2e; /* bleu marine foncé pour texte */
+  padding: 20px;
+}
+
+header {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+h1 {
+  color: #1a1a2e; /* bleu marine */
+  margin-bottom: 10px;
+}
+
+p {
+  color: #5a3e36; /* marron */
+}
+
+.planning {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 30px;
+}
+
+.jour {
+  flex: 1;
+  min-height: 300px;
+  border: 2px solid #5a3e36; /* marron */
+  border-radius: 10px;
+  background-color: #fff8f0; /* beige clair */
+  padding: 10px;
+  transition: background-color 0.3s;
+}
+
+.jour h2 {
+  text-align: center;
+  margin-bottom: 10px;
+  color: #1a1a2e;
+}
+
+.jour.dragover {
+  background-color: #d9e4f5; /* bleu clair quand on drag */
+}
+
+.taches {
+  margin-top: 20px;
+}
+
+.taches h2 {
+  margin-bottom: 10px;
+  color: #1a1a2e;
+}
+
+.tache {
+  padding: 10px;
+  margin-bottom: 8px;
+  background-color: #1a1a2e; /* bleu marine foncé */
+  color: #f5f0e6; /* texte beige */
+  cursor: grab;
+  border-radius: 5px;
+  user-select: none;
+  transition: transform 0.2s;
+}
+
+.tache:active {
+  transform: scale(1.05);
+  cursor: grabbing;
+}
